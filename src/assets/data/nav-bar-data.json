@@ -1,0 +1,30 @@
+[
+  {
+    "label": "发现音乐",
+    "router": "/discover"
+  },
+  {
+    "label": "我的音乐",
+    "router": "/my"
+  },
+  {
+    "label": "关注",
+    "router": "/focus"
+  },
+  {
+    "label": "商城",
+    "url": "https://music.163.com/store/product"
+  },
+  {
+    "label": "音乐人",
+    "url": "https://music.163.com/st/musician"
+  },
+  {
+    "label": "云推歌",
+    "url": "https://music.163.com/st/ad-song"
+  },
+  {
+    "label": "下载客户端",
+    "router": "/download"
+  }
+]
