@@ -15,6 +15,14 @@ const theme = {
     wrapv2: `
       width: 982px;
       margin: 0 auto;
+      `,
+    wrapv3: `
+      width: 980px;
+      margin: 0 auto;
+      `,
+    wrapv4: `
+      width: 1030px;
+      margin: 0 auto;
     `,
   },
 }

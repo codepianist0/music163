@@ -4,7 +4,7 @@ export const NavBarWrapper = styled.div`
   height: 30px;
   background-color: ${(props) => props.theme.color.primary};
   .nav-list {
-    position: fixed;
+    position: absolute;
     top: 70px;
     left: 0;
     right: 0;

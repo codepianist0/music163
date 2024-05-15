@@ -11,16 +11,27 @@ import theme from "./assets/theme"
 import "normalize.css"
 import "@/assets/css/index.less"
 import { HashRouter } from "react-router-dom"
+import { ConfigProvider } from "antd"
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
 root.render(
-  // <React.StrictMode>
   <Provider store={store}>
     <ThemeProvider theme={theme}>
       <HashRouter>
-        <App />
+        <ConfigProvider
+          theme={{
+            components: {
+              Message: {
+                contentBg: "rgca(0,0,0,.5)",
+              },
+            },
+          }}
+        >
+          <App />
+        </ConfigProvider>
       </HashRouter>
     </ThemeProvider>
   </Provider>,
+  // <React.StrictMode>
   // </React.StrictMode>,
 )

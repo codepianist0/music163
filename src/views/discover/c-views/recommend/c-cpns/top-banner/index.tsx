@@ -1,28 +1,22 @@
-import React, { memo, useEffect, useState, useRef, ElementRef } from "react"
+import React, { memo, useState, useRef, ElementRef } from "react"
 import type { FC, ReactNode } from "react"
 import classname from "classnames"
 import { Carousel } from "antd"
 
 import { BannerWrapper, ControlWrapper, DownloadWrapper, BannerContentWrapper } from "./style"
-import { AppShallowEqual, useAppDispatch, useAppSelector } from "@/store"
-import { fetchBannerListAction } from "../../store"
+import { AppShallowEqual, useAppSelector } from "@/store"
 
 interface IProps {
   children?: ReactNode
 }
 
 const TopBanner: FC<IProps> = () => {
-  const [currentIndex, setCurrentIndex] = useState(-1)
-  const dispatch = useAppDispatch()
-  useEffect(() => {
-    dispatch(fetchBannerListAction())
-  }, [])
-  const { banners } = useAppSelector(
-    (state) => ({
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const { banners } = useAppSelector((state) => {
+    return {
       banners: state.recommend.banners,
-    }),
-    AppShallowEqual,
-  )
+    }
+  }, AppShallowEqual)
 
   const CarouselRef = useRef<ElementRef<typeof Carousel>>(null)
 
