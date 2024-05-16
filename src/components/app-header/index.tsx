@@ -1,6 +1,6 @@
 import React, { memo } from "react"
 import type { FC, ReactNode } from "react"
-import { NavLink } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 import { Input } from "antd"
 
 import { HeaderWrapper, LeaftWrapper, RightWrapper } from "./style"
@@ -18,9 +18,9 @@ const AppHeader: FC<IProps> = () => {
       <div className="navBar">
         <LeaftWrapper>
           <h1 className="logo-wrapper">
-            <a className="logo sprite_01" href="/">
+            <Link className="logo sprite_01" to="/discover/recommend">
               网易云音乐
-            </a>
+            </Link>
           </h1>
           <div className="nav-list">
             {navData.map((item) => (

@@ -3,7 +3,7 @@ import styled from "styled-components"
 export const VolumeWrapper = styled.div`
   position: absolute;
   z-index: 9;
-  right: 203px;
+  right: 255px;
   bottom: 47px;
   .process {
     width: 32px;
