@@ -29,9 +29,11 @@ const Recommend: FC<IProps> = () => {
       <Banner />
       <div className="content">
         <div className="left">
-          <HotRecommend />
-          <NewAlbum />
-          <RankingList />
+          <div className="left-box">
+            <HotRecommend />
+            <NewAlbum />
+            <RankingList />
+          </div>
         </div>
         <div className="right">
           <Login />

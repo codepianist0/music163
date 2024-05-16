@@ -2,6 +2,7 @@ import styled from "styled-components"
 
 export const ResidentSingerWrapper = styled.div`
   margin-top: 15px;
+  margin-right: 2px;
   height: 455px;
   background: #fff;
   .singer-list {
