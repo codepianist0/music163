@@ -5,7 +5,14 @@ import { useSearchParams } from "react-router-dom"
 import { fetchPlaylistAction } from "./store"
 import { AppShallowEqual, useAppDispatch, useAppSelector } from "@/store"
 import { LeftWrapper, RightWrapper } from "./style"
-import { setGetImgSize } from "@/utils/format"
+
+import SeactionHeader from "@/components/seaction-header-v3"
+import Info from "./c-cpns/info"
+import Table from "./c-cpns/table"
+import Comments from "./c-cpns/comments"
+import Subscribe from "./c-cpns/subscribe"
+import Recommend from "./c-cpns/recommend"
+import SeactionDownload from "@/components/seaction-download"
 
 interface IProps {
   children?: ReactNode
@@ -30,30 +37,32 @@ const PlayList: FC<IProps> = () => {
 
   return (
     <ListWrapper>
-      <div className="content">
-        <div className="left">
-          <LeftWrapper>
-            <div className="info">
-              <div className="i-left">
-                <div className="img">
-                  <img src={setGetImgSize(playlistInfo.coverImgUrl, 200)} alt="" />
-                  <div className="sprite_cover cover"></div>
-                </div>
-              </div>
-              <div className="i-righ">
-                <div className="list-name">
-                  <i className="sprite_icon_02 tab"></i>
-                  <h2 className="name">{playlistInfo.name}</h2>
-                </div>
-                <div className="list-author"></div>
-              </div>
+      {Object.keys(playlistInfo).length !== 0 && (
+        <div className="content">
+          <LeftWrapper className="left">
+            <Info />
+            <div className="list">
+              <SeactionHeader
+                title="歌曲列表"
+                isLink={true}
+                subTitle={playlistInfo.tracks?.length + "首歌"}
+                playCounter={playlistInfo.playCount}
+              />
+              <Table limit={10} />
             </div>
+            <div className="download">
+              <p>查看更多内容，请下载客户端</p>
+              <button>立即下载</button>
+            </div>
+            <Comments />
           </LeftWrapper>
+          <RightWrapper className="right">
+            <Subscribe />
+            <Recommend />
+            <SeactionDownload />
+          </RightWrapper>
         </div>
-        <div className="right">
-          <RightWrapper></RightWrapper>
-        </div>
-      </div>
+      )}
     </ListWrapper>
   )
 }

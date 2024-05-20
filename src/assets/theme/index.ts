@@ -2,6 +2,7 @@ const theme = {
   color: {
     primary: "#C20C0C",
     secondary: "#9B0909",
+    link: "#0c73c2",
   },
   size: {
     primary: "14px",

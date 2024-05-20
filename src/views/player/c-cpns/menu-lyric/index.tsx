@@ -1,11 +1,11 @@
 import React, { memo, useEffect, useRef } from "react"
 import type { FC, ReactNode } from "react"
 import { ListWrapper, LyricWrapper, MenuLyricWrapper } from "./style"
-import { AppShallowEqual, useAppDispatch, useAppSelector } from "@/store"
+import { AppShallowEqual, useAppSelector } from "@/store"
 import { getFormatTime } from "@/utils/format"
 import classNames from "classnames"
-import { changeCurrentSongAction, changemenuIndexAction, fetchSongLyricAction } from "../../store"
 import { useLocalStore } from "@/hooks/useLocalstore"
+import { yugeEvent } from "@/utils/event-bus"
 
 interface IProps {
   children?: ReactNode
@@ -16,24 +16,23 @@ const MenuLyric: FC<IProps> = (props) => {
   const { setIsShowLyric } = props
   const { songMenu, currentSong, menuIndex, currentLyric, lyricIndex } = useAppSelector(
     (state) => ({
-      songMenu: state.playerr.songMenu,
-      currentSong: state.playerr.currentSong,
-      menuIndex: state.playerr.menuIndex,
-      currentLyric: state.playerr.currentLyric,
-      lyricIndex: state.playerr.lyricIndex,
+      songMenu: state.player.songMenu,
+      currentSong: state.player.currentSong,
+      menuIndex: state.player.menuIndex,
+      currentLyric: state.player.currentLyric,
+      lyricIndex: state.player.lyricIndex,
     }),
     AppShallowEqual,
   )
-  const dispatch = useAppDispatch()
+
   const activeRef = useRef<HTMLDivElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
 
   const [, saveLocalSongLyric] = useLocalStore("lyric", [])
-  function songClickHandle(index: number) {
-    dispatch(changemenuIndexAction(index))
-    dispatch(changeCurrentSongAction(songMenu[index]))
-    dispatch(fetchSongLyricAction(songMenu[index].id))
+  function changeSongHandle(changeindex: number) {
+    yugeEvent.emit("changePlaySongByIndex", changeindex)
   }
+
   useEffect(() => {
     if (containerRef.current && activeRef.current?.clientHeight) {
       const containerHeight = containerRef.current!.clientHeight // 容器的高度
@@ -43,6 +42,7 @@ const MenuLyric: FC<IProps> = (props) => {
       containerRef.current.style.transform = `translateY(${-translateY}px)`
     }
   }, [lyricIndex])
+
   useEffect(() => {
     saveLocalSongLyric(currentLyric)
   }, [currentLyric])
@@ -79,7 +79,7 @@ const MenuLyric: FC<IProps> = (props) => {
                 active: songIndex === menuIndex,
               })}
               key={item.id}
-              onClick={() => songClickHandle(songIndex)}
+              onClick={() => changeSongHandle(songIndex)}
             >
               <div className="i-left">
                 <i

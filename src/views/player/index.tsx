@@ -26,11 +26,11 @@ interface IProps {
 const Player: FC<IProps> = () => {
   const { currentSong, songMenu, menuIndex, currentLyric, lyricIndex } = useAppSelector((state) => {
     return {
-      currentSong: state.playerr.currentSong,
-      songMenu: state.playerr.songMenu,
-      menuIndex: state.playerr.menuIndex,
-      currentLyric: state.playerr.currentLyric,
-      lyricIndex: state.playerr.lyricIndex,
+      currentSong: state.player.currentSong,
+      songMenu: state.player.songMenu,
+      menuIndex: state.player.menuIndex,
+      currentLyric: state.player.currentLyric,
+      lyricIndex: state.player.lyricIndex,
     }
   }, AppShallowEqual)
   const dispatch = useAppDispatch()
@@ -61,16 +61,16 @@ const Player: FC<IProps> = () => {
     }
   }
   // 1.2 切换歌曲
-  function changeSongHandle(isNext: boolean, isClick?: boolean) {
+  function changeSongHandleByBar(isNext?: boolean, isClick?: boolean) {
     let currentIndex = 0
-    switch (palyType) {
-      case 0:
+    switch (type[palyType]) {
+      case "循环":
         currentIndex = (isNext ? 1 : -1) + menuIndex
         break
-      case 1:
+      case "随机":
         currentIndex = getRandomIndex(songMenu.length, menuIndex)
         break
-      case 2:
+      case "单曲":
         if (isClick) {
           currentIndex = (isNext ? 1 : -1) + menuIndex
           break
@@ -85,6 +85,7 @@ const Player: FC<IProps> = () => {
     } else if (currentIndex >= songMenu.length) {
       currentIndex = 0
     }
+
     dispatch(changemenuIndexAction(currentIndex))
     dispatch(changeCurrentSongAction(songMenu[currentIndex]))
     dispatch(fetchSongLyricAction(songMenu[currentIndex].id))
@@ -156,12 +157,18 @@ const Player: FC<IProps> = () => {
     }
   }, [songMenu])
 
-  // eventBus
   useEffect(() => {
+    // event-bus
     const changePlay = (isPlay: boolean) => {
       setIsPlay(isPlay)
     }
+    const changePlaySongByIndex = (changeIndex: number) => {
+      dispatch(changemenuIndexAction(changeIndex))
+      dispatch(changeCurrentSongAction(songMenu[changeIndex]))
+      dispatch(fetchSongLyricAction(songMenu[changeIndex].id))
+    }
     yugeEvent.on("changePlay", changePlay)
+    yugeEvent.on("changePlaySongByIndex", changePlaySongByIndex)
 
     // 2. 获取本地保存的歌曲数据
     dispatch(changeCurrentSongAction(localSong))
@@ -170,6 +177,7 @@ const Player: FC<IProps> = () => {
     dispatch(changemenuIndexAction(localMenuIndex))
     return () => {
       yugeEvent.off("changePlay", changePlay)
+      yugeEvent.off("changePlaySongByIndex", changePlaySongByIndex)
     }
   }, [])
 
@@ -183,7 +191,7 @@ const Player: FC<IProps> = () => {
       {/* 是否锁定 */}
       <div className="content">
         <div className="player-wrapper lock-bar">
-          <i className="player-wrapper lock" onClick={() => setIsLock(!isLock)}></i>
+          <i className="player-wrapper lock" onClick={() => setIsLock(!isLock)} />
         </div>
       </div>
       <div className="player-wrapper player-bar">
@@ -192,13 +200,13 @@ const Player: FC<IProps> = () => {
           <div className="left">
             <i
               className="player-wrapper icon prev"
-              onClick={() => changeSongHandle(false, true)}
-            ></i>
-            <i className="player-wrapper icon play" onClick={handleChangePlay}></i>
+              onClick={() => changeSongHandleByBar(false, true)}
+            />
+            <i className="player-wrapper icon play" onClick={handleChangePlay} />
             <i
               className="player-wrapper icon next"
-              onClick={() => changeSongHandle(true, true)}
-            ></i>
+              onClick={() => changeSongHandleByBar(true, true)}
+            />
           </div>
           <div className="center">
             <div className="img">
@@ -208,13 +216,13 @@ const Player: FC<IProps> = () => {
             <div className="info">
               <div className="top">
                 <a className="name">{currentSong?.name}</a>
-                <i className="player-wrapper play-mv"></i>
+                <i className="player-wrapper play-mv" />
                 {currentSong?.ar?.slice(0, 2).map((item: any) => (
                   <a key={item.id} className="author">
                     {item.name}
                   </a>
                 ))}
-                <i className="player-wrapper from-menu"></i>
+                <i className="player-wrapper from-menu" />
               </div>
               <div className="bottom">
                 <Slider
@@ -234,19 +242,19 @@ const Player: FC<IProps> = () => {
           </div>
           <div className="right">
             <div className="r-left">
-              <i className="icon in-drow"></i>
-              <i className="player-wrapper icon favor"></i>
-              <i className="player-wrapper icon share"></i>
+              <i className="icon in-drow" />
+              <i className="player-wrapper icon favor" />
+              <i className="player-wrapper icon share" />
             </div>
             <div className="player-wrapper slice"></div>
             <div className="r-right">
               <i
                 className="player-wrapper icon loudness"
                 onClick={() => setIsChangeVolume(!ischangeVolume)}
-              ></i>
+              />
               <>
                 <Tooltip placement="top" title={type[palyType]} arrow={true}>
-                  <i className="player-wrapper icon play-mode" onClick={changePlayTypeHandle}></i>
+                  <i className="player-wrapper icon play-mode" onClick={changePlayTypeHandle} />
                 </Tooltip>
               </>
               <div
@@ -263,7 +271,7 @@ const Player: FC<IProps> = () => {
         ref={audioRef}
         onTimeUpdate={timeUpdateHandle}
         preload="auto"
-        onEnded={() => changeSongHandle(true)}
+        onEnded={() => changeSongHandleByBar(true)}
       />
       {isShowLyric && <MenuLyric setIsShowLyric={setIsShowLyric} />}
       {ischangeVolume && <VolumeBar handleVolumeChange={handleVolumeChange} />}

@@ -1,3 +1,5 @@
+import dayjs from "dayjs"
+
 export function getFormatCouter(counter: number): string {
   let result = String(counter)
   if (counter > 100000) {
@@ -19,4 +21,8 @@ export function getFormatTime(time: number) {
   const second = String(Math.floor((time / 1000) % 60)).padStart(2, "0")
   const formatTime = minute + ":" + second
   return formatTime
+}
+
+export function getFormatDate(date: number, formatType = "YYYY-MM-DD") {
+  return dayjs(date).format(formatType)
 }

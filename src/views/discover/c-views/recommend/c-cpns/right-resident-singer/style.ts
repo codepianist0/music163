@@ -5,8 +5,8 @@ export const ResidentSingerWrapper = styled.div`
   margin-right: 2px;
   height: 455px;
   background: #fff;
+  margin: 0 20px;
   .singer-list {
-    margin: 0 20px;
     .item {
       display: flex;
       margin-top: 14px;
@@ -42,7 +42,7 @@ export const ResidentSingerWrapper = styled.div`
     }
   }
   .add {
-    margin: 14px 20px 0;
+    margin: 14px 0 0 0;
     width: 210px;
     height: 31px;
     font-size: 12px;

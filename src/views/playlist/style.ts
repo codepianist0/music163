@@ -3,50 +3,31 @@ import styled from "styled-components"
 export const ListWrapper = styled.div`
   ${(props) => props.theme.mixin.layout1}
 `
+
 export const LeftWrapper = styled.div`
   padding: 47px 30px 40px 39px;
-  .info {
-    height: 361px;
+  font-size: 12px;
+  > .download {
     display: flex;
-    .i-left {
-      flex: 1;
-      .img {
-        position: relative;
-        width: 200px;
-        height: 200px;
-        img {
-          width: 100%;
-        }
-        .cover {
-          position: absolute;
-          width: 208px;
-          height: 208px;
-          top: -4px;
-          left: -4px;
-          background-position: 0 -1285px;
-        }
-      }
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    height: 66px;
+    p {
     }
-    .i-righ {
-      width: 410px;
-      .list-name {
-        display: flex;
-        .tab {
-          flex-shrink: 0;
-          display: block;
-          width: 54px;
-          height: 24px;
-          background-position: 0 -243px;
-        }
-        .name {
-          font-weight: 500;
-          color: #333;
-          font-size: 20px;
-          line-height: 24px;
-        }
-      }
+    button {
+      width: 120px;
+      height: 30px;
+      border: none;
+      border-radius: 15px;
+      background-image: linear-gradient(90deg, #ff5a4c 0%, #ff1d12 100%);
+      color: #fff;
     }
   }
 `
 
-export const RightWrapper = styled.div``
+export const RightWrapper = styled.div`
+  box-sizing: border-box;
+  padding: 0 40px 0 30px;
+`

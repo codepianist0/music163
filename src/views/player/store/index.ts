@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { getSongDetailInfo, getSongLyric, getSongMenuInfo } from "../server"
+import { getSongLyric, getSongMenuInfo } from "../server"
 import { yugeEvent } from "@/utils/event-bus"
 import { formatLyric } from "@/utils/lyric"
 
@@ -23,11 +23,13 @@ const initialState: IIntialState = {
   menuIndex: 0,
 }
 
-export const fetchSongDetailAction = createAsyncThunk("songDetail", (_, { dispatch, getState }) => {
-  getSongDetailInfo().then((res) => {
-    console.log(res)
-  })
-})
+// 添加一首歌曲
+// export const fetchSongDetailAction = createAsyncThunk("songDetail", (_, { dispatch, getState }) => {
+//   getSongDetailInfo().then((res) => {
+//     console.log(res)
+//   })
+// })
+// 切换新的歌单
 export const fetchSongMenuAction = createAsyncThunk("songMenu", (id: number, { dispatch }) => {
   getSongMenuInfo(id).then((res) => {
     const songList = res.playlist.tracks
@@ -39,6 +41,7 @@ export const fetchSongMenuAction = createAsyncThunk("songMenu", (id: number, { d
     yugeEvent.emit("changePlay", true)
   })
 })
+// 获取歌词
 export const fetchSongLyricAction = createAsyncThunk("songLyric", (id: number, { dispatch }) => {
   getSongLyric(id).then((res) => {
     const lyric = formatLyric(res?.lrc?.lyric)

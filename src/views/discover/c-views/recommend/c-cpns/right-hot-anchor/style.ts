@@ -2,12 +2,12 @@ import styled from "styled-components"
 
 export const HotAnchorWrapper = styled.div`
   margin-top: 30px;
+  margin: 0 20px;
   .anthor-list {
-    margin: 0 20px;
     overflow: hidden;
     .item {
       display: flex;
-      margin-top: 15px;
+      margin-bottom: 15px;
       .left {
         width: 40px;
         img {

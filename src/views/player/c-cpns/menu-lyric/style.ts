@@ -185,7 +185,7 @@ export const ListWrapper = styled.div`
             background-position: 0 -20px;
           }
         }
-        .download {
+        > .download {
           width: 14px;
           background-position: -57px -50px;
           &:hover {

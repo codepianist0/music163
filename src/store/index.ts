@@ -7,7 +7,7 @@ import PlaylistReducer from "@/views/playlist/store"
 const store = configureStore({
   reducer: {
     recommend: recommendReducer,
-    playerr: playerReducer,
+    player: playerReducer,
     playlist: PlaylistReducer,
   },
 })
