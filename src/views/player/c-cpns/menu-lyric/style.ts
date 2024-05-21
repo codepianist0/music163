@@ -52,11 +52,11 @@ export const MenuLyricWrapper = styled.div`
             }
           }
         }
-        .delete {
+        .clear {
           display: flex;
           align-items: center;
           cursor: pointer;
-          .delete-i {
+          .clear-i {
             width: 13px;
             height: 16px;
             background-position: -51px 0;

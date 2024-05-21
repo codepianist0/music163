@@ -1,11 +1,13 @@
 import React, { memo, useEffect, useRef } from "react"
 import type { FC, ReactNode } from "react"
 import { ListWrapper, LyricWrapper, MenuLyricWrapper } from "./style"
-import { AppShallowEqual, useAppSelector } from "@/store"
+import { AppShallowEqual, useAppDispatch, useAppSelector } from "@/store"
 import { getFormatTime } from "@/utils/format"
 import classNames from "classnames"
-import { useLocalStore } from "@/hooks/useLocalstore"
 import { yugeEvent } from "@/utils/event-bus"
+import { changeSongMenuAction, changemenuIndexAction } from "../../store"
+import { LocalCache } from "@/utils/cache"
+import { LYRIC } from "@/global"
 
 interface IProps {
   children?: ReactNode
@@ -24,13 +26,25 @@ const MenuLyric: FC<IProps> = (props) => {
     }),
     AppShallowEqual,
   )
+  const dispatch = useAppDispatch()
 
-  const activeRef = useRef<HTMLDivElement>(null)
-  const containerRef = useRef<HTMLDivElement>(null)
+  const activeRef = useRef<HTMLDivElement>(null) // 当前的歌词
+  const containerRef = useRef<HTMLDivElement>(null) // 歌词容器
+  // const [, saveLocalSongLyric] = useLocalStore("lyric", [])
 
-  const [, saveLocalSongLyric] = useLocalStore("lyric", [])
+  // 点击切歌
   function changeSongHandle(changeindex: number) {
     yugeEvent.emit("changePlaySongByIndex", changeindex)
+  }
+
+  // 清除按钮
+  function clearMenuHandle() {
+    // 1. 清空歌单列表和与歌单相关的数据
+    dispatch(changeSongMenuAction([]))
+    dispatch(changemenuIndexAction(0))
+    // 清除本地的缓存
+
+    console.log("clear")
   }
 
   useEffect(() => {
@@ -44,7 +58,7 @@ const MenuLyric: FC<IProps> = (props) => {
   }, [lyricIndex])
 
   useEffect(() => {
-    saveLocalSongLyric(currentLyric)
+    LocalCache.setCache(LYRIC, currentLyric)
   }, [currentLyric])
 
   return (
@@ -52,7 +66,7 @@ const MenuLyric: FC<IProps> = (props) => {
       <div className="playlist_bg top">
         <div className="left">
           <div className="title">
-            <h4>播放列表({songMenu.length})</h4>
+            <h4>播放列表({songMenu?.length})</h4>
           </div>
           <div className="control">
             <div className="favor">
@@ -60,8 +74,8 @@ const MenuLyric: FC<IProps> = (props) => {
               收藏全部
             </div>
             <div className="slice"></div>
-            <div className="delete">
-              <i className="playlist_sprite icon delete-i"></i>
+            <div className="clear" onClick={clearMenuHandle}>
+              <i className="playlist_sprite icon clear-i"></i>
               清除
             </div>
           </div>

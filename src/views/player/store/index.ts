@@ -2,6 +2,8 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { getSongLyric, getSongMenuInfo } from "../server"
 import { yugeEvent } from "@/utils/event-bus"
 import { formatLyric } from "@/utils/lyric"
+import { LocalCache } from "@/utils/cache"
+import { LYRIC, MENU_INDEX, SONG, SONG_MENU } from "@/global"
 
 interface IIntialState {
   currentSong: any
@@ -16,11 +18,11 @@ interface ILyric {
 }
 
 const initialState: IIntialState = {
-  currentSong: {},
-  currentLyric: [],
+  currentSong: LocalCache.getCache(SONG, {}),
+  currentLyric: LocalCache.getCache(LYRIC, {}),
   lyricIndex: 0,
-  songMenu: [],
-  menuIndex: 0,
+  songMenu: LocalCache.getCache(SONG_MENU, []),
+  menuIndex: LocalCache.getCache(MENU_INDEX, 0),
 }
 
 // 添加一首歌曲
@@ -55,15 +57,19 @@ const playerSlice = createSlice({
   reducers: {
     changeCurrentSongAction(state, { payload }) {
       state.currentSong = payload
+      LocalCache.setCache(SONG, payload)
     },
     changeCurrentLyricAction(state, { payload }) {
       state.currentLyric = payload
+      LocalCache.setCache(LYRIC, payload)
     },
     changeSongMenuAction(state, { payload }) {
       state.songMenu = payload
+      LocalCache.setCache(SONG_MENU, payload)
     },
     changemenuIndexAction(state, { payload }) {
       state.menuIndex = payload
+      LocalCache.setCache(MENU_INDEX, payload)
     },
     changeLyricIndexAction(state, { payload }) {
       state.lyricIndex = payload

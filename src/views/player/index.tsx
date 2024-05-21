@@ -4,17 +4,14 @@ import { PlayerControlWrapper, PlayerWrapper } from "./style"
 import { Slider, Tooltip } from "antd"
 import { AppShallowEqual, useAppDispatch, useAppSelector } from "@/store"
 import {
-  changeCurrentLyricAction,
   changeCurrentSongAction,
   changeLyricIndexAction,
-  changeSongMenuAction,
   changemenuIndexAction,
   fetchSongLyricAction,
 } from "./store"
 import { getFormatTime, setGetImgSize } from "@/utils/format"
 import { getSongPlayUrl } from "@/utils/handler-player"
 import { yugeEvent } from "@/utils/event-bus"
-import { useLocalStore } from "@/hooks/useLocalstore"
 import VolumeBar from "./c-cpns/volume-bar/volume-bar"
 import { getRandomIndex } from "@/utils/getrandomindex"
 import MenuLyric from "./c-cpns/menu-lyric"
@@ -101,7 +98,7 @@ const Player: FC<IProps> = () => {
     }
     // 获取当前匹配的歌词
     let index = -1
-    for (let i = 0; i < currentLyric.length - 1; i++) {
+    for (let i = 0; i < currentLyric?.length - 1; i++) {
       if (currentLyric[i].time > currentTime) {
         index = i - 1
         break
@@ -129,52 +126,37 @@ const Player: FC<IProps> = () => {
   }
 
   // 3. 副作用
-  const [localSong, saveLocalCurrentSong] = useLocalStore("currentSong", {})
-  const [localSongLyric, saveLocalSongLyric] = useLocalStore("lyric", [])
-  const [localSongMenu, saveLocalSongMenu] = useLocalStore("songMenu", [])
-  const [localMenuIndex, saveLocalMenuIndex] = useLocalStore("menuIndex", 0)
   // 当歌曲发生变化
   useEffect(() => {
     // 1. 重新播放
-    audioRef.current!.src = getSongPlayUrl(currentSong.id)
+    audioRef.current!.src = getSongPlayUrl(currentSong?.id)
     if (isPlay) {
       audioRef.current?.play().catch((err) => {
         console.log(err)
       })
     }
-    // 2. 将播放的歌曲保存到本地
-    if (Object.keys(currentSong).length !== 0) {
-      saveLocalCurrentSong(currentSong)
-      saveLocalSongLyric(currentLyric)
-      saveLocalMenuIndex(menuIndex)
-    }
   }, [currentSong])
 
-  // 歌单发生变化
-  useEffect(() => {
-    if (Object.keys(songMenu).length !== 0) {
-      saveLocalSongMenu(songMenu)
-    }
-  }, [songMenu])
-
+  const menuInfoRef = useRef<any[]>([])
+  menuInfoRef.current = songMenu
   useEffect(() => {
     // event-bus
     const changePlay = (isPlay: boolean) => {
       setIsPlay(isPlay)
     }
+    console.log(songMenu)
+
     const changePlaySongByIndex = (changeIndex: number) => {
+      console.log(songMenu)
+
       dispatch(changemenuIndexAction(changeIndex))
-      dispatch(changeCurrentSongAction(songMenu[changeIndex]))
-      dispatch(fetchSongLyricAction(songMenu[changeIndex].id))
+      dispatch(changeCurrentSongAction(menuInfoRef.current[changeIndex]))
+      dispatch(fetchSongLyricAction(menuInfoRef.current[changeIndex].id))
     }
+
     yugeEvent.on("changePlay", changePlay)
     yugeEvent.on("changePlaySongByIndex", changePlaySongByIndex)
 
-    // 2. 获取本地保存的歌曲数据
-    dispatch(changeCurrentSongAction(localSong))
-    dispatch(changeCurrentLyricAction(localSongLyric))
-    dispatch(changeSongMenuAction(localSongMenu))
-    dispatch(changemenuIndexAction(localMenuIndex))
     return () => {
       yugeEvent.off("changePlay", changePlay)
       yugeEvent.off("changePlaySongByIndex", changePlaySongByIndex)
@@ -235,7 +217,7 @@ const Player: FC<IProps> = () => {
                 <div className="time">
                   <span className="current">{getFormatTime(currentTime)}</span>
                   <span className="slice">/</span>
-                  <span className="total">{getFormatTime(currentSong.dt)}</span>
+                  <span className="total">{getFormatTime(currentSong?.dt)}</span>
                 </div>
               </div>
             </div>
@@ -261,7 +243,7 @@ const Player: FC<IProps> = () => {
                 className="player-wrapper singer-menu"
                 onClick={() => setIsShowLyric(!isShowLyric)}
               >
-                <span>{songMenu.length}</span>
+                <span>{songMenu?.length}</span>
               </div>
             </div>
           </div>

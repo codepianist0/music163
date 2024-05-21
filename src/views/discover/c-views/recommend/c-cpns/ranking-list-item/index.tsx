@@ -31,9 +31,9 @@ const ListItem: FC<IProps> = (props) => {
             <div className="index">{index + 1}</div>
             <div className="name">{item.name}</div>
             <div className="icon-list">
-              <i className="sprite_02 icon play"></i>
-              <i className="sprite_icon_02 icon add"></i>
-              <i className="sprite_02 icon favor"></i>
+              <i className="sprite_02 icon play" />
+              <i className="sprite_icon_02 icon add" />
+              <i className="sprite_02 icon favor" />
             </div>
           </li>
         ))}
