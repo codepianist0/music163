@@ -2,6 +2,7 @@ import React, { memo } from "react"
 import type { FC, ReactNode } from "react"
 import { ListItemWrapper } from "./style"
 import { setGetImgSize } from "@/utils/format"
+import { useNavigate } from "react-router-dom"
 
 interface IProps {
   children?: ReactNode
@@ -10,6 +11,10 @@ interface IProps {
 
 const ListItem: FC<IProps> = (props) => {
   const { listInfo } = props
+  const navigate = useNavigate()
+  function toSongClick() {
+    navigate(`/song?id=${listInfo.id}`)
+  }
   return (
     <ListItemWrapper>
       <div className="top">
@@ -29,7 +34,9 @@ const ListItem: FC<IProps> = (props) => {
         {listInfo.tracks.slice(0, 10).map((item: any, index: any) => (
           <li className="item" key={item.id}>
             <div className="index">{index + 1}</div>
-            <div className="name">{item.name}</div>
+            <div className="name" onClick={toSongClick}>
+              {item.name}
+            </div>
             <div className="icon-list">
               <i className="sprite_02 icon play" />
               <i className="sprite_icon_02 icon add" />

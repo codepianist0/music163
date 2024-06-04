@@ -40,6 +40,20 @@ const theme = {
         width: 252px;
       }
     }`,
+    layout2: `> .content {
+      display: flex;
+      justify-content: space-between;
+      margin: 0 auto;
+      width: 980px;
+      min-height: 200px;
+      background-image: url(${require("@/assets/img/wrap_bg_02.png")});
+      > .left {
+        flex: 1;
+      }
+      > .right {
+        width: 270px;
+      }
+    }`,
   },
 }
 

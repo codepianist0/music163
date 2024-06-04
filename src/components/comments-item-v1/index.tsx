@@ -1,7 +1,8 @@
 import React, { memo } from "react"
 import type { FC, ReactNode } from "react"
 import { CommentWrapper } from "./style"
-import { getFormatDate, setGetImgSize } from "@/utils/format"
+import { getFormatCouter, getFormatDate, setGetImgSize } from "@/utils/format"
+import { formatCountdown } from "antd/es/statistic/utils"
 
 interface IProps {
   children?: ReactNode
@@ -28,7 +29,7 @@ const CommentsItem: FC<IProps> = (props) => {
           <div className="right">
             <div className="like">
               <i className="sprite_icon_03 icon"></i>
-              <span>({commentInfo.likedCount})</span>
+              <span>({getFormatCouter(commentInfo.likedCount)})</span>
             </div>
             <span className="slice">|</span>
             <div className="return">回复</div>

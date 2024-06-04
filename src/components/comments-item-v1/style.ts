@@ -7,6 +7,7 @@ export const CommentWrapper = styled.div<IComment>`
   padding: 15px 0;
   display: flex;
   border-bottom: 1px dotted #ccc;
+  font-size: 12px;
   > .img {
     margin-right: 15px;
   }

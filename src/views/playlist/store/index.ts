@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { getCommentsData, getPlaylistData, getRelatedData, getSubscribersData } from "../service"
 
+// 获取歌单信息
 export const fetchPlaylistAction = createAsyncThunk("fetchPlaylist", (id: number, { dispatch }) => {
   // 先清空store内容
   dispatch(changePlaylistAction({}))
@@ -32,6 +33,7 @@ interface ICommentArg {
   id: number
   page: number
 }
+// 获取评论信息
 export const fetchCommentAction = createAsyncThunk(
   "fetchComment",
   (arg: ICommentArg, { dispatch }) => {

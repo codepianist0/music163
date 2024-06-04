@@ -2,14 +2,13 @@ import React, { memo, useCallback } from "react"
 import type { FC, ReactNode } from "react"
 import { CommentsWrapper } from "./style"
 import { AppShallowEqual, useAppDispatch, useAppSelector } from "@/store"
-import { ConfigProvider } from "antd"
-import TextArea from "antd/es/input/TextArea"
 import HeaderV1 from "@/components/seaction-header-v3"
 import HeaderV2 from "@/components/seaction-header-v2"
 import CommentsItemV1 from "@/components/comments-item-v1"
 import Pagination from "@/components/pagination"
 import { fetchCommentAction } from "../../store"
 import { useSearchParams } from "react-router-dom"
+import SeactionPublication from "@/components/seaction-publication"
 
 interface IProps {
   children?: ReactNode
@@ -41,25 +40,7 @@ const Comments: FC<IProps> = () => {
   return (
     <CommentsWrapper>
       <HeaderV1 title="评论" subTitle={`共${total}条评论`} />
-      <div className="publication">
-        <div className="top">
-          <div className="img">
-            <img src={require("@/assets/img/default_avatar.jpg")} alt="" />
-          </div>
-          <div className="info">{myTextArea}</div>
-        </div>
-        <div className="bottom">
-          <div className="control">
-            <div className="left">
-              <i className="sprite_icon_02 icon expression"></i>
-              <i className="sprite_icon_02 icon link"></i>
-            </div>
-            <div className="right">
-              <div className="sprite_bottom submit">评论</div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <SeactionPublication />
       <div className="hotComments">
         <HeaderV2 title="精彩评论" />
         <div className="content">
@@ -82,20 +63,5 @@ const Comments: FC<IProps> = () => {
     </CommentsWrapper>
   )
 }
-
-const myTextArea = (
-  <ConfigProvider
-    theme={{
-      components: {
-        Input: {
-          activeBorderColor: "#C20C0C",
-          hoverBorderColor: "#C20C0C",
-        },
-      },
-    }}
-  >
-    <TextArea showCount maxLength={140} placeholder="评论" style={{ resize: "none" }} />
-  </ConfigProvider>
-)
 
 export default memo(Comments)

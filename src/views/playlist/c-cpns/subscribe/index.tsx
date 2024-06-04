@@ -22,7 +22,7 @@ const Subscribe: FC<IProps> = () => {
       <SeactionHeaderV2 title="喜欢这个歌单的人" />
       <div className="list">
         {subscribers.slice(0, 8).map((item) => (
-          <div className="item" key={item.avatarImgId}>
+          <div className="item" key={item.userId}>
             <img src={setGetImgSize(item.avatarUrl, 40)} alt="" />
           </div>
         ))}

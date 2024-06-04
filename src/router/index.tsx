@@ -15,6 +15,7 @@ const Focus = React.lazy(() => import("@/views/focus"))
 const Artist = React.lazy(() => import("@/views/artist"))
 const Download = React.lazy(() => import("@/views/download"))
 const Playlist = React.lazy(() => import("@/views/playlist"))
+const Song = React.lazy(() => import("@/views/song"))
 
 const routers: RouteObject[] = [
   {
@@ -74,6 +75,10 @@ const routers: RouteObject[] = [
   {
     path: "/playlist",
     element: <Playlist />,
+  },
+  {
+    path: "/song",
+    element: <Song />,
   },
 ]
 

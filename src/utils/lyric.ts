@@ -1,5 +1,7 @@
+type LyricListType = { time: number; text: string }[]
+
 const timeRegExp = /\[(\d{2}):(\d{2}.(\d{2,3}))\]/
-export function formatLyric(lyric: string) {
+export function formatLyric(lyric = ""): LyricListType {
   // 1. 切割歌词
   const lines: string[] = lyric.split("\n")
   // 2. 通过正则匹配歌词和时间
@@ -22,4 +24,13 @@ export function formatLyric(lyric: string) {
   })
 
   return lyricList
+}
+
+export function getLyric(formatLyric: LyricListType) {
+  const lyricArr: string[] = []
+  formatLyric.forEach((item) => {
+    lyricArr.push(item.text)
+  })
+  const lyricStr = lyricArr.join("\n")
+  return lyricStr
 }

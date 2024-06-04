@@ -9,6 +9,8 @@ export const PaginationWrapper = styled.div<IPagination>`
   justify-content: center;
   margin: 20px 0;
   line-height: 24px;
+  font-size: 12px;
+  user-select: none;
 
   .pages {
     display: flex;

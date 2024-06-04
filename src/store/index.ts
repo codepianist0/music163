@@ -4,11 +4,13 @@ import type { TypedUseSelectorHook } from "react-redux"
 import recommendReducer from "@/views/discover/c-views/recommend/store"
 import playerReducer from "@/views/player/store"
 import PlaylistReducer from "@/views/playlist/store"
+import SongReducer from "@/views/song/store"
 const store = configureStore({
   reducer: {
     recommend: recommendReducer,
     player: playerReducer,
     playlist: PlaylistReducer,
+    song: SongReducer,
   },
 })
 

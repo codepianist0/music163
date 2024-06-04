@@ -144,11 +144,8 @@ const Player: FC<IProps> = () => {
     const changePlay = (isPlay: boolean) => {
       setIsPlay(isPlay)
     }
-    console.log(songMenu)
 
     const changePlaySongByIndex = (changeIndex: number) => {
-      console.log(songMenu)
-
       dispatch(changemenuIndexAction(changeIndex))
       dispatch(changeCurrentSongAction(menuInfoRef.current[changeIndex]))
       dispatch(fetchSongLyricAction(menuInfoRef.current[changeIndex].id))
