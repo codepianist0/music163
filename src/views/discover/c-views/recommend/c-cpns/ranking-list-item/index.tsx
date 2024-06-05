@@ -12,8 +12,10 @@ interface IProps {
 const ListItem: FC<IProps> = (props) => {
   const { listInfo } = props
   const navigate = useNavigate()
-  function toSongClick() {
-    navigate(`/song?id=${listInfo.id}`)
+  function toSongClick(index: number) {
+    console.log(index)
+
+    navigate(`/song?id=${listInfo.tracks?.[index]?.id}`)
   }
   return (
     <ListItemWrapper>
@@ -34,7 +36,7 @@ const ListItem: FC<IProps> = (props) => {
         {listInfo.tracks.slice(0, 10).map((item: any, index: any) => (
           <li className="item" key={item.id}>
             <div className="index">{index + 1}</div>
-            <div className="name" onClick={toSongClick}>
+            <div className="name" onClick={() => toSongClick(index)}>
               {item.name}
             </div>
             <div className="icon-list">

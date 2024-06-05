@@ -6,7 +6,7 @@ import { AppShallowEqual, useAppSelector } from "@/store"
 import { throttle } from "underscore"
 
 import SeactionHeader from "@/components/seaction-header-v1"
-import MenuItem from "@/components/singer-menu-item-v2"
+import MenuItem from "@/components/song-menu-item-v2"
 
 interface IProps {
   children?: ReactNode

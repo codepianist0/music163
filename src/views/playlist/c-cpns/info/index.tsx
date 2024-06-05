@@ -1,4 +1,4 @@
-import React, { memo, useState } from "react"
+import React, { memo, useEffect, useRef, useState } from "react"
 import type { FC, ReactNode } from "react"
 import { InfoWrapper } from "./style"
 import { getFormatCouter, getFormatDate, setGetImgSize } from "@/utils/format"
@@ -16,6 +16,19 @@ const Info: FC<IProps> = () => {
     AppShallowEqual,
   )
   const [isShowDesc, setIsShowDesc] = useState(false)
+  const [unfoldIsShow, setUnfoldIsShow] = useState(false)
+
+  // 展开是否显示
+  const descRef = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    const height = descRef.current?.scrollHeight
+    if (height && height <= 180) {
+      descRef.current.style.height = "auto"
+    }
+    if (height && height > 180) {
+      setUnfoldIsShow(true)
+    }
+  }, [])
 
   return (
     <InfoWrapper $isShowDesc={isShowDesc}>
@@ -72,12 +85,16 @@ const Info: FC<IProps> = () => {
             </div>
           ))}
         </div>
-        <div className="list-desc">{playlistInfo.description}</div>
-        <div className="desc-detail">
-          <span onClick={() => setIsShowDesc(!isShowDesc)}>
-            {isShowDesc ? "收起" : "展开"} <i className="sprite_icon_02 icon"></i>
-          </span>
+        <div className="list-desc" ref={descRef}>
+          {playlistInfo.description}
         </div>
+        {unfoldIsShow && (
+          <div className="desc-detail">
+            <span onClick={() => setIsShowDesc(!isShowDesc)}>
+              {isShowDesc ? "收起" : "展开"} <i className="sprite_icon_02 icon"></i>
+            </span>
+          </div>
+        )}
       </div>
     </InfoWrapper>
   )

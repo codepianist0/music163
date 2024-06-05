@@ -8,7 +8,7 @@ export function getSongInfo(ids: number) {
     },
   })
 }
-
+// 获取评论
 export function getCommentInfo(id: number, limit = 20, offset?: number) {
   return ygRequest.get({
     url: "/comment/music",

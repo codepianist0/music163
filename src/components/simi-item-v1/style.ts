@@ -19,10 +19,13 @@ export const SimiItemWrapper = styled.div`
     }
     .author {
       margin-top: 4px;
-      cursor: pointer;
       color: #999;
-      &:hover {
-        text-decoration: underline;
+      span {
+        margin-right: 5px;
+        &:hover {
+          text-decoration: underline;
+          cursor: pointer;
+        }
       }
     }
   }

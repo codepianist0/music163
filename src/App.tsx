@@ -4,8 +4,10 @@ import routers from "@/router"
 import AppHeader from "./components/app-header"
 import AppFooter from "./components/app-footer"
 import Player from "./views/player"
+import useScrollToTop from "./hooks/useScrollToTop"
 
 function App() {
+  useScrollToTop()
   return (
     <div className="App">
       <AppHeader />

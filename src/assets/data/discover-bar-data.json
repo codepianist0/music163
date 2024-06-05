@@ -5,7 +5,7 @@
   },
   {
     "label": "排行榜",
-    "router": "/discover/ranking"
+    "router": "/discover/ranking?id=19723756"
   },
   {
     "label": "歌单",

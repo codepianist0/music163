@@ -25,8 +25,7 @@ const theme = {
       width: 1030px;
       margin: 0 auto;
     `,
-    layout1: `
-    > .content {
+    layout1: `> .content {
       display: flex;
       width: 982px;
       margin: 0 auto;
@@ -52,6 +51,23 @@ const theme = {
       }
       > .right {
         width: 270px;
+      }
+    }`,
+    layout3: `> .content {
+      display: flex;
+      justify-content: space-between;
+      width: 980px;
+      margin: 0 auto;
+      min-height: 700px;
+      background: url(${require("@/assets/img/wrap_bg_03.png")});
+      border: 1px solid #d3d3d3;
+      > .left {
+        width: 240px;
+        box-sizing: border-box;
+      }
+      > .right {
+        width: 740px;
+        box-sizing: border-box;
       }
     }`,
   },

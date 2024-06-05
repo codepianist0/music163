@@ -41,25 +41,31 @@ const Comments: FC<IProps> = () => {
     <CommentsWrapper>
       <HeaderV1 title="评论" subTitle={`共${total}条评论`} />
       <SeactionPublication />
-      <div className="hotComments">
-        <HeaderV2 title="精彩评论" />
-        <div className="content">
-          {hotCommentsInfo?.map((item: any) => (
-            <CommentsItemV1 commentInfo={item} key={item.commentId} />
-          ))}
-        </div>
-      </div>
-      <div className="newComments">
-        <HeaderV2 title={`最新评论${total}`} />
-        <div className="content">
-          {newCommentsInfo?.map((item: any) => (
-            <CommentsItemV1 commentInfo={item} key={item.commentId} />
-          ))}
-        </div>
-        <div className="pagination">
-          <Pagination totals={total} onChange={changePageHandle} />
-        </div>
-      </div>
+      {total > 0 && (
+        <>
+          <div className="hotComments">
+            <HeaderV2 title="精彩评论" />
+            <div className="content">
+              {hotCommentsInfo?.map((item: any) => (
+                <CommentsItemV1 commentInfo={item} key={item.commentId} />
+              ))}
+            </div>
+          </div>
+          <div className="newComments">
+            <HeaderV2 title={`最新评论${total}`} />
+            <div className="content">
+              {newCommentsInfo?.map((item: any) => (
+                <CommentsItemV1 commentInfo={item} key={item.commentId} />
+              ))}
+            </div>
+            {total > 20 && (
+              <div className="pagination">
+                <Pagination totals={total} onChange={changePageHandle} />
+              </div>
+            )}
+          </div>
+        </>
+      )}
     </CommentsWrapper>
   )
 }

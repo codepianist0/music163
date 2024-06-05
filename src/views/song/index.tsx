@@ -1,4 +1,4 @@
-import React, { memo } from "react"
+import React, { memo, useEffect } from "react"
 import type { FC, ReactNode } from "react"
 import { SongWrapper } from "./style"
 import Info from "./c-cpns/info"
@@ -17,9 +17,11 @@ interface IProps {
 const Song: FC<IProps> = () => {
   const [searchParams] = useSearchParams()
   const { id } = Object.fromEntries(searchParams)
-  // 处理ids
+  // 处理id
   const dispatch = useAppDispatch()
-  dispatch(fetchSongInfoAction(Number(id)))
+  useEffect(() => {
+    dispatch(fetchSongInfoAction(Number(id)))
+  }, [])
   return (
     <SongWrapper>
       <div className="content">

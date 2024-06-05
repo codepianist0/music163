@@ -3,7 +3,7 @@ import type { FC, ReactNode } from "react"
 import { HotWrapper } from "./style"
 import SeactionHeader from "@/components/seaction-header-v1"
 import { AppShallowEqual, useAppSelector } from "@/store"
-import SingerMenuItem from "@/components/singer-menu-item-v1"
+import SingerMenuItem from "@/components/song-menu-item-v1"
 
 interface IProps {
   children?: ReactNode

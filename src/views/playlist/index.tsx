@@ -6,7 +6,7 @@ import { fetchPlaylistAction } from "./store"
 import { AppShallowEqual, useAppDispatch, useAppSelector } from "@/store"
 import { LeftWrapper, RightWrapper } from "./style"
 
-import SeactionHeader from "@/components/seaction-header-v3"
+import SeactionHeaderV3 from "@/components/seaction-header-v3"
 import Info from "./c-cpns/info"
 import Table from "./c-cpns/table"
 import Comments from "./c-cpns/comments"
@@ -42,7 +42,7 @@ const PlayList: FC<IProps> = () => {
           <LeftWrapper className="left">
             <Info />
             <div className="list">
-              <SeactionHeader
+              <SeactionHeaderV3
                 title="歌曲列表"
                 isLink={true}
                 subTitle={playlistInfo.tracks?.length + "首歌"}
