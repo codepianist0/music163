@@ -6,7 +6,7 @@ export const InfoWrapper = styled.div<ILeft>`
   display: flex;
   margin-bottom: 20px;
   .i-left {
-    flex: 1;
+    margin-right: 20px;
     .img {
       position: relative;
       width: 200px;
@@ -25,7 +25,6 @@ export const InfoWrapper = styled.div<ILeft>`
     }
   }
   .i-righ {
-    width: 410px;
     .list-name {
       display: flex;
       .tab {
@@ -73,7 +72,7 @@ export const InfoWrapper = styled.div<ILeft>`
           display: flex;
           align-items: center;
           justify-content: center;
-          padding-right: 5px;
+          padding-right: 4px;
           width: 61px;
           height: 31px;
           background-position: left -387px;

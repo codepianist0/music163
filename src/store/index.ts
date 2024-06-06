@@ -3,16 +3,18 @@ import { shallowEqual, useDispatch, useSelector } from "react-redux"
 import type { TypedUseSelectorHook } from "react-redux"
 import playerReducer from "@/views/player/store"
 import PlaylistReducer from "@/views/playlist/store"
-import SongReducer from "@/views/song/store"
-import recommendReducer from "@/views/discover/c-views/recommend/store"
-import RankingReducer from "@/views/discover/c-views/ranking/store"
+import songReducer from "@/views/song/store"
+import discoverRecommendReducer from "@/views/discover/c-views/recommend/store"
+import discoverRankingReducer from "@/views/discover/c-views/ranking/store"
+import discoverPlayListReducer from "@/views/discover/c-views/playList/store"
 const store = configureStore({
   reducer: {
-    recommend: recommendReducer,
+    recommend: discoverRecommendReducer,
+    ranking: discoverRankingReducer,
+    discoverPlaylist: discoverPlayListReducer,
     player: playerReducer,
     playlist: PlaylistReducer,
-    song: SongReducer,
-    ranking: RankingReducer,
+    song: songReducer,
   },
 })
 

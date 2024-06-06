@@ -5,7 +5,7 @@ import type { RouteObject } from "react-router-dom"
 const Discover = React.lazy(() => import("@/views/discover"))
 const Recommend = React.lazy(() => import("@/views/discover/c-views/recommend"))
 const Ranking = React.lazy(() => import("@/views/discover/c-views/ranking"))
-const PlayLists = React.lazy(() => import("@/views/discover/c-views/playLists"))
+const PlayLists = React.lazy(() => import("@/views/discover/c-views/playList"))
 const Djradio = React.lazy(() => import("@/views/discover/c-views/djradio"))
 const Singer = React.lazy(() => import("@/views/discover/c-views/singer"))
 const Album = React.lazy(() => import("@/views/discover/c-views/album"))
