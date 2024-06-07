@@ -60,7 +60,7 @@ const Comments: FC<IProps> = () => {
             </div>
             {total > 20 && (
               <div className="pagination">
-                <Pagination totals={total} onChange={changePageHandle} />
+                <Pagination totals={total} pageSize={20} onChange={changePageHandle} />
               </div>
             )}
           </div>

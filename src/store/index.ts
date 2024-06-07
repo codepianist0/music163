@@ -7,6 +7,7 @@ import songReducer from "@/views/song/store"
 import discoverRecommendReducer from "@/views/discover/c-views/recommend/store"
 import discoverRankingReducer from "@/views/discover/c-views/ranking/store"
 import discoverPlayListReducer from "@/views/discover/c-views/playList/store"
+import discoverDjradioReducer from "@/views/discover/c-views/djradio/store"
 const store = configureStore({
   reducer: {
     recommend: discoverRecommendReducer,
@@ -15,6 +16,7 @@ const store = configureStore({
     player: playerReducer,
     playlist: PlaylistReducer,
     song: songReducer,
+    djradio: discoverDjradioReducer,
   },
 })
 

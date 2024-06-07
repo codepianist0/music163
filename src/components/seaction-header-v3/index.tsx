@@ -8,15 +8,43 @@ interface IProps {
   subTitle?: string
   playCounter?: number
   isLink?: boolean
+  isMore?: boolean
+  Title?: JSX.Element
+  SubTitle?: JSX.Element
+  Right?: JSX.Element
 }
 
 const SeactionHeader: FC<IProps> = (props) => {
-  const { title = "默认标题", subTitle, isLink = false, playCounter = -1 } = props
+  const {
+    title = "默认标题",
+    Title,
+    subTitle,
+    SubTitle,
+    isLink = false,
+    playCounter = -1,
+    isMore,
+    Right,
+  } = props
+
+  function titleClick() {
+    console.log("title click", title)
+  }
+
+  function moreClick() {
+    console.log("more click")
+  }
+
   return (
     <HeaderWrapper>
       <div className="left">
-        <h3 className="title">{title}</h3>
-        <div className="counter">{subTitle}</div>
+        {typeof title === "string" && !Title && (
+          <h3 className="title" onClick={titleClick}>
+            {title}
+          </h3>
+        )}
+        {Title}
+        <div className="sub-title">{subTitle}</div>
+        {SubTitle}
       </div>
       <div className="right">
         {isLink && (
@@ -25,12 +53,17 @@ const SeactionHeader: FC<IProps> = (props) => {
             生成外链播放器
           </div>
         )}
-
         {playCounter !== -1 && (
           <div className="paly-counter">
             播放: <span>{playCounter}</span>次
           </div>
         )}
+        {isMore && (
+          <div className="more" onClick={moreClick}>
+            更多&gt;
+          </div>
+        )}
+        {Right}
       </div>
     </HeaderWrapper>
   )

@@ -48,7 +48,7 @@ const Comment: FC<IProps> = () => {
         {comment.map((item) => (
           <CommentsItemV1 key={item.commentId} commentInfo={item} />
         ))}
-        <Pagination totals={rankingDetail.commentCount} onChange={pageChangeClick} />
+        <Pagination totals={rankingDetail.commentCount} pageSize={20} onChange={pageChangeClick} />
       </div>
     </CommentWrapper>
   )

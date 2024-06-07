@@ -47,7 +47,7 @@ const Comments: FC<IProps> = () => {
           ))}
         </div>
       </div>
-      <Pagination totals={total} onChange={chengPage} />
+      <Pagination totals={total} pageSize={20} onChange={chengPage} />
     </CommentsWrapper>
   )
 }

@@ -70,6 +70,24 @@ const theme = {
         box-sizing: border-box;
       }
     }`,
+    showLine1: `
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      &:hover {
+        text-decoration: underline;
+      }
+    `,
+    showLine2: `
+    overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      cursor: pointer;
+      &:hover {
+        text-decoration: underline;
+      }`,
   },
 }
 

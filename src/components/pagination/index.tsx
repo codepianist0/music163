@@ -6,11 +6,12 @@ import classNames from "classnames"
 interface IProps {
   children?: ReactNode
   totals: number
+  pageSize: number
   onChange: (index: number) => void
 }
 
 const Pagination: FC<IProps> = (props) => {
-  const { totals, onChange } = props
+  const { totals, onChange, pageSize = 20 } = props
   const [pageIndex, setPageIndex] = useState(1)
   const [pageCount, setPageCount] = useState(0)
   const [canClick, setcanClick] = useState([false, false])
@@ -83,7 +84,7 @@ const Pagination: FC<IProps> = (props) => {
 
   // 获取页码数
   useEffect(() => {
-    const count = Math.ceil(totals / 20)
+    const count = Math.ceil(totals / pageSize)
     setPageCount(count)
   }, [totals])
 

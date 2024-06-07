@@ -15,7 +15,7 @@ export const HeaderWrapper = styled.div`
       font-weight: 500;
       color: #333;
     }
-    .counter {
+    .sub-title {
       margin-left: 20px;
       color: #666;
     }
@@ -44,6 +44,13 @@ export const HeaderWrapper = styled.div`
         margin: 0 0 0 5px;
         font-weight: 700;
         color: ${(props) => props.theme.color.primary};
+      }
+    }
+    .more {
+      color: #666;
+      &:hover {
+        text-decoration: underline;
+        cursor: pointer;
       }
     }
   }
