@@ -40,7 +40,7 @@ export const fetchSongMenuAction = createAsyncThunk("songMenu", (id: number, { d
     dispatch(changemenuIndexAction(0))
     dispatch(fetchSongLyricAction(songList[0].id))
     // 切换完歌单后播放
-    yugeEvent.emit("changePlay", true)
+    // yugeEvent.emit("changePlay", true)
   })
 })
 // 获取歌词

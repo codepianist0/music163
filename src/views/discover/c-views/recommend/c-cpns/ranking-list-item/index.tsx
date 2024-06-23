@@ -3,6 +3,9 @@ import type { FC, ReactNode } from "react"
 import { ListItemWrapper } from "./style"
 import { setGetImgSize } from "@/utils/format"
 import { useNavigate } from "react-router-dom"
+import { yugeEvent } from "@/utils/event-bus"
+import { useAppDispatch } from "@/store"
+import { fetchSongMenuAction } from "@/views/player/store"
 
 interface IProps {
   children?: ReactNode
@@ -12,10 +15,26 @@ interface IProps {
 const ListItem: FC<IProps> = (props) => {
   const { listInfo } = props
   const navigate = useNavigate()
-  function toSongClick(index: number) {
-    console.log(index)
+  const dispatch = useAppDispatch()
 
+  // 播放歌单
+  function playMenuListClick(listInfo: any) {
+    dispatch(fetchSongMenuAction(listInfo.id))
+    yugeEvent.emit("changePlay", true)
+  }
+
+  // 跳转音乐页面
+  function toSongClick(index: number) {
     navigate(`/song?id=${listInfo.tracks?.[index]?.id}`)
+  }
+  // 音乐播放
+  function musicPlayHandle(info: any) {
+    yugeEvent.emit("palyMusicById", info)
+  }
+
+  // 将音乐添加到歌单中
+  function musicPushHandle(info: any) {
+    yugeEvent.emit("pushMusicToMenu", info)
   }
   return (
     <ListItemWrapper>
@@ -27,8 +46,8 @@ const ListItem: FC<IProps> = (props) => {
         <div className="right">
           <div className="name">{listInfo.name}</div>
           <div className="control">
-            <i className="sprite_02 icon paly"></i>
-            <i className="sprite_02 icon favor"></i>
+            <i className="sprite_02 icon paly" onClick={() => playMenuListClick(listInfo)} />
+            <i className="sprite_02 icon favor" />
           </div>
         </div>
       </div>
@@ -40,8 +59,8 @@ const ListItem: FC<IProps> = (props) => {
               {item.name}
             </div>
             <div className="icon-list">
-              <i className="sprite_02 icon play" />
-              <i className="sprite_icon_02 icon add" />
+              <i className="sprite_02 icon play" onClick={() => musicPlayHandle(item)} />
+              <i className="sprite_icon_02 icon add" onClick={() => musicPushHandle(item)} />
               <i className="sprite_02 icon favor" />
             </div>
           </li>

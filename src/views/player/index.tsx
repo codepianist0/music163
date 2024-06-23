@@ -6,6 +6,7 @@ import { AppShallowEqual, useAppDispatch, useAppSelector } from "@/store"
 import {
   changeCurrentSongAction,
   changeLyricIndexAction,
+  changeSongMenuAction,
   changemenuIndexAction,
   fetchSongLyricAction,
 } from "./store"
@@ -141,22 +142,66 @@ const Player: FC<IProps> = () => {
   menuInfoRef.current = songMenu
   useEffect(() => {
     // event-bus
+    // 播放与暂停
     const changePlay = (isPlay: boolean) => {
       setIsPlay(isPlay)
+      handleChangePlay()
     }
-
+    // 通过下标切换歌曲
     const changePlaySongByIndex = (changeIndex: number) => {
       dispatch(changemenuIndexAction(changeIndex))
       dispatch(changeCurrentSongAction(menuInfoRef.current[changeIndex]))
       dispatch(fetchSongLyricAction(menuInfoRef.current[changeIndex].id))
     }
+    // 往歌单添加歌曲
+    const pushMusicToMenu = (musicInfo: any) => {
+      // 检查是否存在歌曲
+      const menuList = JSON.parse(JSON.stringify(menuInfoRef.current))
+      const isInclude = menuList.some((item: any) => {
+        return item.id === musicInfo.id
+      })
+      // 如果不存在
+      if (!isInclude) {
+        // 将歌曲添加到歌单
+        menuList.push(musicInfo)
+        dispatch(changeSongMenuAction(menuList))
+      }
+    }
+    // 通过id切换歌曲
+    const palyMusicById = (musicInfo: any) => {
+      // 检查是否存在歌曲
+      const menuList = JSON.parse(JSON.stringify(menuInfoRef.current))
+      const index = menuList.findIndex((item: any) => {
+        return item.id === musicInfo.id
+      })
+      // 如果存在
+      if (index !== -1) {
+        // 直接播放
+        dispatch(changemenuIndexAction(index))
+        dispatch(changeCurrentSongAction(menuList[index]))
+        dispatch(fetchSongLyricAction(menuList[index].id))
+      } else {
+        // 将歌曲添加到歌单
+        menuList.push(musicInfo)
+        dispatch(changeSongMenuAction(menuList))
+        const index = menuList.length - 1
+        dispatch(changemenuIndexAction(index))
+        dispatch(changeCurrentSongAction(menuList[index]))
+        dispatch(fetchSongLyricAction(menuList[index].id))
+      }
+      setIsPlay(true)
+    }
 
     yugeEvent.on("changePlay", changePlay)
     yugeEvent.on("changePlaySongByIndex", changePlaySongByIndex)
+    yugeEvent.on("pushMusicToMenu", pushMusicToMenu)
+    yugeEvent.on("palyMusicById", palyMusicById)
 
     return () => {
       yugeEvent.off("changePlay", changePlay)
       yugeEvent.off("changePlaySongByIndex", changePlaySongByIndex)
+      yugeEvent.off("pushMusicToMenu", pushMusicToMenu)
+      yugeEvent.off("palyMusicById", palyMusicById)
     }
   }, [])
 
