@@ -50,6 +50,7 @@ const theme = {
         flex: 1;
       }
       > .right {
+        margin-left: 1px;
         width: 270px;
       }
     }`,
@@ -70,6 +71,23 @@ const theme = {
         box-sizing: border-box;
       }
     }`,
+    layout4: `> .content {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    min-height: 400px;
+    width: 980px;
+    background: url(${require("@/assets/img/wrap_bg_04.png")});
+    border: 1px solid #d3d3d3;
+    border-width: 0 1px;
+    > .left {
+      width: 180px;
+    }
+    > .right {
+      margin-left: 1px;
+      flex: 1;
+    }
+  }`,
     showLine1: `
       overflow: hidden;
       white-space: nowrap;
@@ -79,7 +97,7 @@ const theme = {
       }
     `,
     showLine2: `
-    overflow: hidden;
+      overflow: hidden;
       text-overflow: ellipsis;
       display: -webkit-box;
       -webkit-box-orient: vertical;

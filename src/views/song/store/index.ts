@@ -10,7 +10,7 @@ export const fetchSongInfoAction = createAsyncThunk("fetchSongInfo", (id: number
   dispatch(changeLyricAction(""))
   dispatch(changeHotCommentsAction([]))
   dispatch(changeCommentsAction([]))
-  dispatch(changeTotalAction(0))
+  dispatch(changeAlbumTotalAction(0))
   dispatch(changeSimiAction([]))
 
   // 2. 获取新的歌单信息
@@ -24,7 +24,7 @@ export const fetchSongInfoAction = createAsyncThunk("fetchSongInfo", (id: number
   getCommentInfo(id).then((res) => {
     dispatch(changeHotCommentsAction(res.hotComments))
     dispatch(changeCommentsAction(res.comments))
-    dispatch(changeTotalAction(res.total))
+    dispatch(changeAlbumTotalAction(res.total))
   })
   getSimiInfo(id).then((res) => {
     dispatch(changeSimiAction(res.songs))
@@ -70,7 +70,7 @@ const songSlice = createSlice({
     changeCommentsAction(state, { payload }) {
       state.comments = payload
     },
-    changeTotalAction(state, { payload }) {
+    changeAlbumTotalAction(state, { payload }) {
       state.total = payload
     },
     changeSimiAction(state, { payload }) {
@@ -84,7 +84,7 @@ export const {
   changeLyricAction,
   changeHotCommentsAction,
   changeCommentsAction,
-  changeTotalAction,
+  changeAlbumTotalAction,
   changeSimiAction,
 } = songSlice.actions
 export default songSlice.reducer

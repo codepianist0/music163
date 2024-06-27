@@ -7,7 +7,7 @@ export const MenuItemWrapper = styled.div`
   .top {
     position: relative;
     img {
-      width: 100%;
+      width: 140px;
       height: 140px;
       object-fit: cover;
     }

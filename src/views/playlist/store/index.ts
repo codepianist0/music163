@@ -17,7 +17,7 @@ export const fetchPlaylistAction = createAsyncThunk("fetchPlaylist", (id: number
   getCommentsData(id).then((res) => {
     dispatch(changeHotCommentsAction(res.hotComments))
     dispatch(changeNewCommentsAction(res.comments))
-    dispatch(changeTotalAction(res.total))
+    dispatch(changeAlbumTotalAction(res.total))
   })
   // 获取歌单订阅的人
   getSubscribersData(id).then((res) => {
@@ -77,7 +77,7 @@ const playlistSlice = createSlice({
     changeNewCommentsAction(state, { payload }) {
       state.newCommentsInfo = payload
     },
-    changeTotalAction(state, { payload }) {
+    changeAlbumTotalAction(state, { payload }) {
       state.total = payload
     },
     changeSubscribersAction(state, { payload }) {
@@ -93,7 +93,7 @@ export const {
   changePlaylistAction,
   changeHotCommentsAction,
   changeNewCommentsAction,
-  changeTotalAction,
+  changeAlbumTotalAction,
   changeSubscribersAction,
   changeRelatedAction,
 } = playlistSlice.actions

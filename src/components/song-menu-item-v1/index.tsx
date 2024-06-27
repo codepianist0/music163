@@ -28,7 +28,10 @@ const SingerMenuItem: FC<IProps> = (props) => {
   return (
     <MenuItemWrapper>
       <div className="top">
-        <img src={setGetImgSize(menuInfo.picUrl, 140)} alt={menuInfo.name} />
+        <img
+          src={setGetImgSize(menuInfo.picUrl ?? menuInfo.coverImgUrl, 140)}
+          alt={menuInfo.name}
+        />
         <a className="sprite_cover cover" onClick={() => menuClickHandle(menuInfo)}>
           <div className="sprite_cover info">
             <div className="left">

@@ -36,11 +36,9 @@ const Pagination: FC<IProps> = (props) => {
     let currentIndex = 0
     if (pageIndex <= 5) {
       currentIndex = index + 2
-    }
-    if (pageIndex > 5 && pageIndex <= pageCount - 5) {
+    } else if (pageIndex > 5 && pageIndex <= pageCount - 5) {
       currentIndex = pageIndex - 3 + index
-    }
-    if (pageIndex > pageCount - 5) {
+    } else if (pageIndex > pageCount - 5) {
       currentIndex = pageCount - 7 + index
     }
     return (

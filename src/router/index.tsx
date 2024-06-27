@@ -7,7 +7,7 @@ const Recommend = React.lazy(() => import("@/views/discover/c-views/recommend"))
 const Ranking = React.lazy(() => import("@/views/discover/c-views/ranking"))
 const PlayLists = React.lazy(() => import("@/views/discover/c-views/playList"))
 const Djradio = React.lazy(() => import("@/views/discover/c-views/djradio"))
-const Singer = React.lazy(() => import("@/views/discover/c-views/singer"))
+const DSinger = React.lazy(() => import("@/views/discover/c-views/singer"))
 const Album = React.lazy(() => import("@/views/discover/c-views/album"))
 
 const My = React.lazy(() => import("@/views/my"))
@@ -16,6 +16,8 @@ const Artist = React.lazy(() => import("@/views/artist"))
 const Download = React.lazy(() => import("@/views/download"))
 const Playlist = React.lazy(() => import("@/views/playlist"))
 const Song = React.lazy(() => import("@/views/song"))
+const Singer = React.lazy(() => import("@/views/singer"))
+const User = React.lazy(() => import("@/views/user"))
 
 const routers: RouteObject[] = [
   {
@@ -48,7 +50,7 @@ const routers: RouteObject[] = [
       },
       {
         path: "/discover/singer",
-        element: <Singer />,
+        element: <DSinger />,
       },
       {
         path: "/discover/album",
@@ -79,6 +81,14 @@ const routers: RouteObject[] = [
   {
     path: "/song",
     element: <Song />,
+  },
+  {
+    path: "/singer",
+    element: <Singer />,
+  },
+  {
+    path: "/user",
+    element: <User />,
   },
 ]
 
