@@ -4,7 +4,7 @@ export const HeaderWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 33px;
+  height: 40px;
   font-size: 12px;
   border-bottom: 2px solid ${(props) => props.theme.color.primary};
   .left {

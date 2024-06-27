@@ -27,11 +27,13 @@ const User: FC<IProps> = () => {
   }, [])
   return (
     <UserWrapper>
-      <div className="info">
-        <UserInfo />
+      <div className="content">
+        <div className="info">
+          <UserInfo />
+        </div>
+        <div className="create-album">{DJRadio.length !== 0 && <JDRadio />}</div>
+        <div className="favor-album">{album.length !== 0 && <FavorAlbum />}</div>
       </div>
-      <div className="create-album">{DJRadio.length !== 0 && <JDRadio />}</div>
-      <div className="favor-album">{album.length !== 0 && <FavorAlbum />}</div>
     </UserWrapper>
   )
 }

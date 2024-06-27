@@ -1,6 +1,5 @@
 import React, { memo, useEffect } from "react"
 import type { FC, ReactNode } from "react"
-import { MVWrapper } from "../MV/style"
 import { AppShallowEqual, useAppDispatch, useAppSelector } from "@/store"
 import { fetchDescriptionAction } from "../../store"
 import { useGetSearchParams } from "@/hooks/useGetSearchParams"
@@ -33,7 +32,7 @@ const Description: FC<IProps> = () => {
         <p>{description.briefDesc}</p>
       </div>
       <div className="order">
-        {description.introduction.map((item: any) => (
+        {description.introduction?.map((item: any) => (
           <div className="o-desc" key={item.ti}>
             <h2 className="title">{item.ti}</h2>
             <p>{item.txt}</p>

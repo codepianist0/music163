@@ -1,15 +1,17 @@
 import styled from "styled-components"
 
-export const AlbumWrapper = styled.div`
+export const ItemWrapper = styled.div`
   .img {
     position: relative;
+    width: 153px;
+    height: 130px;
     .cover {
       position: absolute;
       top: 0;
       bottom: 0;
       left: 0;
       right: 0;
-      background-position: -170px -850px;
+      background-position: 0 -845px;
       cursor: pointer;
       &:hover {
         .play {
@@ -30,13 +32,17 @@ export const AlbumWrapper = styled.div`
       }
     }
   }
+  font-family: Arial, Helvetica, sans-serif;
   .name {
-    margin: 8px 0 3px;
-    ${(props) => props.theme.mixin.showLine2}
+    margin: 8px 0 8px;
+    color: #000;
+    ${(props) => props.theme.mixin.showLine1}
+    cursor: pointer;
   }
-  .time {
-    margin-top: 5px;
-    color: #666;
+  .author {
     font-size: 12px;
+    color: #666;
+    ${(props) => props.theme.mixin.showLine1}
+    cursor: pointer;
   }
 `

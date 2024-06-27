@@ -87,7 +87,16 @@ const theme = {
       margin-left: 1px;
       flex: 1;
     }
-  }`,
+    }`,
+    layout5: `> .content {
+      margin: 0 auto;
+      padding: 40px;
+      width: 900px;
+      min-height: 700px;
+      border: 1px solid #d3d3d3;
+      border-width: 0 1px;
+      background-color: #fff;
+    }`,
     showLine1: `
       overflow: hidden;
       white-space: nowrap;
@@ -99,7 +108,7 @@ const theme = {
     showLine2: `
       overflow: hidden;
       text-overflow: ellipsis;
-      display: -webkit-box;
+      display: -webkit-box !important;
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 2;
       cursor: pointer;

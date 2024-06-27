@@ -1,7 +1,7 @@
-import { getFormatDate, setGetImgSize } from "@/utils/format"
 import React, { memo } from "react"
 import type { FC, ReactNode } from "react"
-import { AlbumWrapper } from "./style"
+import { ItemWrapper } from "./style"
+import { setGetImgSize } from "@/utils/format"
 
 interface IProps {
   children?: ReactNode
@@ -11,16 +11,16 @@ interface IProps {
 const AlbumItem: FC<IProps> = (props) => {
   const { info } = props
   return (
-    <AlbumWrapper>
+    <ItemWrapper>
       <div className="img">
         <div className="sprite_cover cover">
           <i className="sprite_icon play" />
         </div>
-        <img src={setGetImgSize(info.picUrl, 120)} alt="" />
+        <img src={setGetImgSize(info.picUrl, 130)} alt="" />
       </div>
       <div className="name">{info.name}</div>
-      <div className="time">{getFormatDate(info.publishTime, "YYYY.MM.DD")}</div>
-    </AlbumWrapper>
+      <div className="author">{props.info.artist.name}</div>
+    </ItemWrapper>
   )
 }
 
