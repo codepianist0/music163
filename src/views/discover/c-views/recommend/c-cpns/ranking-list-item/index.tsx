@@ -36,12 +36,16 @@ const ListItem: FC<IProps> = (props) => {
   function musicPushHandle(info: any) {
     yugeEvent.emit("pushMusicToMenu", info)
   }
+  // 跳转到榜单
+  function toRankingHandle() {
+    navigate(`/discover/ranking?id=${listInfo.id}`)
+  }
   return (
     <ListItemWrapper>
       <div className="top">
         <div className="left">
           <img src={setGetImgSize(listInfo.coverImgUrl, 80)} alt="" />
-          <div className="sprite_cover cover"></div>
+          <div className="sprite_cover cover" onClick={() => toRankingHandle()}></div>
         </div>
         <div className="right">
           <div className="name">{listInfo.name}</div>
@@ -65,7 +69,9 @@ const ListItem: FC<IProps> = (props) => {
             </div>
           </li>
         ))}
-        <li className="item more">查看全部 &gt;</li>
+        <li className="item more" onClick={() => toRankingHandle()}>
+          查看全部 &gt;
+        </li>
       </ul>
     </ListItemWrapper>
   )

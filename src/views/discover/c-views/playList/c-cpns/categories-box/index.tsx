@@ -9,6 +9,7 @@ import {
   fetchPlaylistInfo,
 } from "../../store"
 import classNames from "classnames"
+import { useNavigate } from "react-router-dom"
 
 const bgPosition = ["-20px -735px", "0 -60px", "0 -88px", "0 -117px", "0 -141px"]
 
@@ -18,6 +19,7 @@ interface IProps {
 
 const CategoriesBox: FC<IProps> = () => {
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
   const { tagsInfo, filterInfo, isShowCate } = useAppSelector(
     (state) => ({
       tagsInfo: state.discoverPlaylist.tagsInfo,
@@ -62,6 +64,7 @@ const CategoriesBox: FC<IProps> = () => {
     dispatch(fetchPlaylistInfo({ ...filterInfo, cat: subName }))
     dispatch(changeTitleAction(subName ? subName : "全部"))
     dispatch(changeIsShowCateAction(false))
+    navigate(`/discover/playlists?cat=${subName || "all"}`)
   }
 
   return (

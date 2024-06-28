@@ -15,12 +15,9 @@ export function getHotRecommendData(limit = 30) {
   })
 }
 
-export function getNewAlbumData(limit = 30) {
+export function getNewAlbumData() {
   return ygRequest.get({
-    url: "/album/list",
-    params: {
-      limit,
-    },
+    url: "/album/newest",
   })
 }
 

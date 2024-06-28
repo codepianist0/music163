@@ -14,8 +14,8 @@ export const fetchRecommendDataAction = createAsyncThunk("recommend", (_, { disp
   getHotRecommendData(8).then((res) => {
     dispatch(changeHotRecommendAction(res.result))
   })
-  getNewAlbumData(10).then((res) => {
-    dispatch(changeNewAlbumAction(res.products))
+  getNewAlbumData().then((res) => {
+    dispatch(changeNewAlbumAction(res.albums))
   })
   getResidentSingerData().then((res) => {
     dispatch(changeResidentSingerAction(res.list.artists))

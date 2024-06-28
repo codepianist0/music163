@@ -23,25 +23,10 @@ export const HeaderWrapper = styled.div`
       background-position: -225px -156px;
     }
     .title {
+      margin-right: 10px;
       font-size: 20px;
       font-weight: 500;
       cursor: pointer;
-    }
-    .tab-list {
-      display: flex;
-      margin-left: 20px;
-      height: 15px;
-      .text {
-        color: #666;
-        cursor: pointer;
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-      .slice {
-        margin: 0 10px;
-        color: #ccc;
-      }
     }
   }
   .right {

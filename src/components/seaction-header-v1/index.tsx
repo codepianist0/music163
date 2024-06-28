@@ -7,28 +7,27 @@ interface IProps {
   title?: string
   tabs?: string[]
   moreText?: string
+  SubTitle?: JSX.Element
+  moreClick?: () => void
 }
 
 const SeactionHeader: FC<IProps> = (props) => {
-  const { title = "默认标题", tabs = [], moreText = "更多" } = props
-
+  const { title = "默认标题", moreText = "更多", SubTitle, moreClick } = props
+  function moreClickHandle() {
+    moreClick && moreClick()
+  }
   return (
     <HeaderWrapper>
       <div className="left">
         <i className="sprite_02 icon"></i>
-        <h3 className="title">{title}</h3>
-        <div className="tab-list">
-          {tabs.map((item) => (
-            <div className="tab-item" key={item}>
-              <span className="text">{item}</span>
-              <span className="slice">|</span>
-            </div>
-          ))}
-        </div>
+        <h3 className="title" onClick={moreClickHandle}>
+          {title}
+        </h3>
+        {SubTitle}
       </div>
       <div className="right">
         <div className="more">
-          <span>{moreText}</span>
+          <span onClick={moreClickHandle}>{moreText}</span>
           <i className="sprite_02 icon"></i>
         </div>
       </div>

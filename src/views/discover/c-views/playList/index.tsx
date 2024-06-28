@@ -5,6 +5,7 @@ import SeactionHeader from "./c-cpns/seaction-header"
 import { useAppDispatch } from "@/store"
 import { fetchPlaylistInfo, fetchTagsInfo } from "./store"
 import MenuList from "./c-cpns/menu-list"
+import { useGetSearchParams } from "@/hooks/useGetSearchParams"
 
 interface IProps {
   children?: ReactNode
@@ -12,9 +13,14 @@ interface IProps {
 
 const PlayList: FC<IProps> = () => {
   const dispatch = useAppDispatch()
+  const { cat } = useGetSearchParams()
   useEffect(() => {
     dispatch(fetchTagsInfo())
-    dispatch(fetchPlaylistInfo({}))
+    dispatch(
+      fetchPlaylistInfo({
+        cat,
+      }),
+    )
   }, [])
   return (
     <PlaylistWrapper>

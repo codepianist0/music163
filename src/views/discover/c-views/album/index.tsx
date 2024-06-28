@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from "react"
+import React, { memo, useEffect } from "react"
 import type { FC, ReactNode } from "react"
 import { AlbumWrapper } from "./style"
 import SeactionHeaderV3 from "@/components/seaction-header-v3"

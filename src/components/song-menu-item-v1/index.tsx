@@ -45,7 +45,7 @@ const SingerMenuItem: FC<IProps> = (props) => {
         </a>
       </div>
       <div className="bottom">
-        <span>{menuInfo.name}</span>
+        <span onClick={() => menuClickHandle(menuInfo)}>{menuInfo.name}</span>
       </div>
     </MenuItemWrapper>
   )

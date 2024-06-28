@@ -7,12 +7,14 @@ import { throttle } from "underscore"
 
 import SeactionHeader from "@/components/seaction-header-v1"
 import MenuItem from "@/components/song-menu-item-v2"
+import { useNavigate } from "react-router-dom"
 
 interface IProps {
   children?: ReactNode
 }
 
 const NewAlbum: FC<IProps> = () => {
+  const navigate = useNavigate()
   const { newAlbum } = useAppSelector(
     (state) => ({
       newAlbum: state.recommend.newAlbum,
@@ -25,9 +27,13 @@ const NewAlbum: FC<IProps> = () => {
     isNext ? carouselRef.current?.next() : carouselRef.current?.prev()
   }, 1600)
 
+  function moreClick() {
+    navigate(`/discover/album`)
+  }
+
   return (
     <NewAlbumWrapper>
-      <SeactionHeader title="新碟上架" />
+      <SeactionHeader title="新碟上架" moreClick={moreClick} />
       <div className="content">
         <div className="control">
           <div className="sprite_02 left" onClick={() => changeBannerHandle(false)}></div>
@@ -38,14 +44,14 @@ const NewAlbum: FC<IProps> = () => {
             <div>
               <div className="item">
                 {newAlbum.slice(0, 5).map((item) => (
-                  <MenuItem key={item.albumId} albumInfo={item} />
+                  <MenuItem key={item.id} albumInfo={item} />
                 ))}
               </div>
             </div>
             <div>
               <div className="item">
                 {newAlbum.slice(5, 10).map((item) => (
-                  <MenuItem key={item.albumId} albumInfo={item} />
+                  <MenuItem key={item.id} albumInfo={item} />
                 ))}
               </div>
             </div>

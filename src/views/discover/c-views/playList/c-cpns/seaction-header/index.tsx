@@ -5,6 +5,7 @@ import CategoriesBox from "../categories-box"
 import { AppShallowEqual, useAppDispatch, useAppSelector } from "@/store"
 import { changeFilterInfoAction, changeIsShowCateAction, fetchPlaylistInfo } from "../../store"
 import { useNavigate } from "react-router-dom"
+import { useGetSearchParams } from "@/hooks/useGetSearchParams"
 
 interface IProps {
   children?: ReactNode
@@ -13,6 +14,7 @@ interface IProps {
 const Header: FC<IProps> = () => {
   const bodyEl = document.querySelector("body")
   const navicate = useNavigate()
+  const { cat } = useGetSearchParams()
   const [isFristClick, setIsFristClick] = useState(true)
   const { filterInfo, isShowCate, title } = useAppSelector(
     (state) => ({
@@ -39,6 +41,13 @@ const Header: FC<IProps> = () => {
     navicate("?order=hot")
     dispatch(fetchPlaylistInfo({ ...filterInfo, order: "hot" }))
   }
+  function getTitle() {
+    if (cat === "all") {
+      return "全部"
+    } else {
+      return cat
+    }
+  }
 
   useEffect(() => {
     function bodyClick() {
@@ -53,7 +62,7 @@ const Header: FC<IProps> = () => {
   return (
     <HeaderWrapper>
       <div className="left">
-        <h3 className="title">{title}</h3>
+        <h3 className="title">{getTitle()}</h3>
         <div className="sprite_buttom categories" onClick={(e) => showCateHandle(e)}>
           <span className="sprite_buttom text">
             选择分类
